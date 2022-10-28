@@ -1,6 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 
+
+
 const GlobalStyle = createGlobalStyle`
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
     a, abbr, acronym, address, big, cite, code,
@@ -29,9 +33,11 @@ const GlobalStyle = createGlobalStyle`
     body {
         line-height: 1;
         width: 375px;
-        height: 880px;
+        height: 670px;
+        background-color: #001;
 
-        font-family: roboto;
+
+        font-family: 'Roboto', sans-serif;
     }
     ol, ul {
         list-style: none;
