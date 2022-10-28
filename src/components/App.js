@@ -14,7 +14,7 @@ export default function App(){
         <Routes>
             <Route path="/" element={<Login/>}/>
             <Route path="/sign-up" element={<Signup/>}/>
-            <Route path="/subscriptions/:ID_DO_PLANO" element={<Subscriptions/>}/>
+            <Route path="/subscriptions/" element={<Subscriptions/>}/>
             <Route path="/home" element={<MainPage/>}/>
         </Routes>
     </BrowserRouter>

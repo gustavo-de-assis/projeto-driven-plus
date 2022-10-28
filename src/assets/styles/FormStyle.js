@@ -14,9 +14,10 @@ input, button{
     border-radius: 8px;
     border: none;
     margin: 8px 36px;
+
 }
 
-input::placeholder{
+input{
     padding-left: 10px;
 }
 
