@@ -1,5 +1,6 @@
+import axios from "axios"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import FormStyle from "../../assets/styles/FormStyle"
 import LoginContainer from "../../assets/styles/LoginContainer"
 
@@ -10,12 +11,21 @@ export default function Signup() {
         password: "",
         cpf: ""
     })
-
+    const navigate = useNavigate();
     function signUser(e){
         e.preventDefault();
         const cadastro = {...userInfo}
-
+        
+        const URL = `https://mock-api.driven.com.br/api/v4/driven-plus/auth/sign-up`;
+        
         console.log(cadastro);
+        
+        axios.post(URL, cadastro).then((ans) => {
+            alert("Cadastro realizado com sucesso!");
+            navigate("/");
+        }).catch((err) => {
+                alert(err.response.data.message); 
+        })
     }
 
     function formHandler(e){

@@ -1,18 +1,59 @@
-import { Link } from "react-router-dom"
+import axios from "axios"
+import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import logo from "../../assets/img/driven-plus.png"
 import FormStyle from "../../assets/styles/FormStyle"
 import LoginContainer from "../../assets/styles/LoginContainer"
 
 export default function Login() {
+    const [loginInfo, setLoginInfo] = useState({ email: "", password: "" })
+    const navigate = useNavigate();
+    
+    function formHandler(e){
+        const {name, value} = e.target;
+        setLoginInfo({...loginInfo, [name]:value})
+    }
+
+    function logUser(e){
+
+        e.preventDefault();
+        const log = {...loginInfo}
+        
+        const URL = `https://mock-api.driven.com.br/api/v4/driven-plus/auth/login`;
+        
+        console.log(log);
+        
+        axios.post(URL, log).then((ans) => {
+            alert("Login realizado com sucesso!");
+            console.log(ans.data)
+            navigate("/");
+        }).catch((err) => {
+                alert(err.response.data.message); 
+        })
+
+    }
+
     return (<LoginContainer>
         <Logo>
             <img src={logo} alt="" />
         </Logo>
-        <FormStyle>
-            <input type="email" placeholder="Email"></input>
-            <input type="password" placeholder="Senha"></input>
-            <button>ENTRAR</button>
+        <FormStyle onSubmit={logUser}>
+            <input
+                name="email"
+                type="email"
+                value={loginInfo.email}
+                placeholder="Email"
+                onChange={formHandler}
+                required />
+            <input
+                name="password"
+                type="password"
+                value={loginInfo.password}
+                placeholder="Senha"
+                onChange={formHandler}
+                required />
+            <button type="submit">ENTRAR</button>
         </FormStyle>
         <Link to={"/sign-up"}>
             <p>Não possui uma conta? Cadastre-se</p>
