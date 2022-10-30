@@ -13,7 +13,7 @@ input, button{
     height: 52px;
     border-radius: 8px;
     border: none;
-    margin: 8px 36px;
+    margin: 8px auto;
 
 }
 
@@ -29,6 +29,15 @@ button{
     :hover{
         cursor: pointer;
         opacity: 0.8;
+    }
+}
+div{
+    width: 100%
+    display:flex;
+    flex-wrap: wrap;
+    input{
+        width: 140px;
+        margin: 4px;
     }
 }
 `

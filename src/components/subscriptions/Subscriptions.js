@@ -1,7 +1,18 @@
+import axios from "axios"
+import { useEffect } from "react"
+import { useParams } from "react-router-dom"
 import styled from "styled-components"
 import Plan from "./Plan"
 
 export default function Subscriptions(){
+    const {idSubscription} = useParams();
+/*    useEffect(()=>{
+        const URL = 'https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships';
+        axios.get(URL,{email:'teste@teste.com',password:'123456'})
+        .then((ans)=>console.log(ans.data))
+        .catch((err)=>console.log(err.response.data.message))
+    },[]);*/
+
     return(<SubscriptionsContainer>
         <p>Escolha seu plano</p>
         <Plan></Plan>       
