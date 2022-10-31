@@ -21,14 +21,11 @@ export default function Login({setToken}) {
         const log = {...loginInfo}
         
         const URL = `https://mock-api.driven.com.br/api/v4/driven-plus/auth/login`;
-        
-        console.log(log);
-        
+                
         axios.post(URL, log).then((ans) => {
-            alert("Login realizado com sucesso!");
             setToken(ans.data.token)
             if(!ans.data.membership){
-                navigate("/subscriptions")
+                navigate("/plans")
             }else{
                 navigate("/home");
             }

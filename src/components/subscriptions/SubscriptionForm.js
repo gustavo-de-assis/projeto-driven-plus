@@ -1,10 +1,14 @@
 import FormStyle from "../../assets/styles/FormStyle"
 import logo from "../../assets/img/plano-logo.png"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
-export default function SubscriptionForm(){
-   
+export default function SubscriptionForm({token}){
+    const { idSubscription } = useParams();
+
+    const [planData, setPlanData] = useState([]);
     const [paymentData, setPaymentData] = useState({
         cardName: "",
         cardNumber: "",
@@ -12,22 +16,51 @@ export default function SubscriptionForm(){
         expiration: ""
     })
 
+    useEffect(() => {
+        const URL = `https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships/${idSubscription}`;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+        axios.get(URL, config)
+            .then((ans) => setPlanData(ans.data))
+            .catch((err) => console.log(err.response.data.message))
+    }, []);
+
 
     function formHandler(e){
         const {name, value} = e.target;
         setPaymentData({...paymentData, [name]:value})
     }
+    function signPlan(){
+        
+    }
+    if(planData === []){
+        return <>
+            Carregando
+        </>
+    }
 
+    console.log("Dados", planData);
    return(<>
         <p> retornar </p>
         <LogoStyle>
             <img src={logo} alt=""/>
-            <p>Driven Plus</p>
+            <p>{planData.name}</p>
         </LogoStyle>
         <PlanInfo>
-            
+            <div>
+                <p>Benefícios:</p>
+            </div>
+                {planData.perks.map((perk)=> <p key={perk.id}>{perk.title}</p>)}
+            <div>
+                <p>Preço:</p>
+            </div>
+                <p>R$ {planData.price} cobrados mensalmente</p>
+
         </PlanInfo>
-        <FormStyle>
+        <FormStyle onSubmit={signPlan}>
             <input 
                 name="cardName"
                 type="text"
@@ -81,4 +114,10 @@ const LogoStyle = styled.div`
     }
 `
 const PlanInfo = styled.div`
+    padding-left: 36px;
+    color:#fff;
+    div{
+        display: flex;
+        flex-direction: row;
+    }
 `

@@ -3,7 +3,8 @@ import styled from "styled-components"
 export default function Plan({image, price}){
     return(
         <PlanContainer>
-            <svg src={image} alt=""/>
+            <svg xmlns={image} viewBox="0 0 24 24" stroke="currentColor">
+            </svg>
             <p>R${price}</p>
         </PlanContainer>
     )

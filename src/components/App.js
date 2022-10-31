@@ -5,8 +5,8 @@ import Login from "./login/Login"
 import Signup from "./login/Signup"
 import Subscriptions from "./subscriptions/Subscriptions"
 import MainPage from "./home/MainPage"
-import SubscriptionForm from "./subscriptions/SubscriptionForm";
 import { useState } from "react";
+import SubscriptionForm from "./subscriptions/SubscriptionForm";
 
 
 export default function App(){
@@ -18,8 +18,8 @@ export default function App(){
         <Routes>
             <Route path="/" element={<Login setToken={setToken}/>}/>
             <Route path="/sign-up" element={<Signup/>}/>
-            <Route path="/subscriptions" element={<Subscriptions token={token}/>} />
-            <Route path="/subscriptions/:idSubscription" element={<SubscriptionForm/>}/>
+            <Route path="/plans" element={<Subscriptions token={token}/>} />
+            <Route path="/subscription/:idSubscription" element={<SubscriptionForm token={token}/>} />
             <Route path="/home" element={<MainPage/>}/>
         </Routes>
     </BrowserRouter>
