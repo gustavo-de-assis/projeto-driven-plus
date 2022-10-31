@@ -1,15 +1,25 @@
 import axios from "axios"
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import logo from "../../assets/img/driven-plus.png"
 import FormStyle from "../../assets/styles/FormStyle"
 import LoginContainer from "../../assets/styles/LoginContainer"
+import AuthContext from "../../contexts/AuthContext"
 
-export default function Login({setToken}) {
+export default function Login() {
+    const {setToken} = useContext(AuthContext);
     const [loginInfo, setLoginInfo] = useState({ email: "", password: "" })
     const navigate = useNavigate();
     
+
+    useEffect(()=>{
+        const localStorageToken = localStorage.getItem("token");
+        if(localStorageToken){
+            setToken(localStorageToken);
+        }
+    },[]);
+
     function formHandler(e){
         const {name, value} = e.target;
         setLoginInfo({...loginInfo, [name]:value})
@@ -24,6 +34,7 @@ export default function Login({setToken}) {
                 
         axios.post(URL, log).then((ans) => {
             setToken(ans.data.token)
+            localStorage.setItem("token", ans.data.token);
             if(!ans.data.membership){
                 navigate("/plans")
             }else{

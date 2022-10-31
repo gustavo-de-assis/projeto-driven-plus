@@ -3,6 +3,7 @@ import usuario from "../../assets/img/usuario.png"
 
 
 export default function MainPage() {
+    
     return (<MainPageLayout>
         <MainPageHeader>
             <img src={usuario} alt=""/>
@@ -14,7 +15,7 @@ export default function MainPage() {
         </UserPerks>
         <PlanEdit>
             <button>Mudar Plano</button>
-            <button cor = {'#FFaabb'}>Cancelar Plano</button>
+            <button style={{backgroundColor: '#FF4747'}}>Cancelar Plano</button>
         </PlanEdit>
 
     </MainPageLayout>)

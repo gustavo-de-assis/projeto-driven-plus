@@ -1,10 +1,12 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
+import AuthContext from "../../contexts/AuthContext"
 import Plan from "./Plan"
 
-export default function Subscriptions({ token }) {
+export default function Subscriptions () {
+    const {token} = useContext(AuthContext);
     const [plans, setPlans] = useState([]);
 
     useEffect(() => {
