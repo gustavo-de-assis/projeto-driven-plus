@@ -1,11 +1,10 @@
 import styled from "styled-components"
-import logo from "../../assets/img/plano-logo.png"
 
-export default function Plan(){
+export default function Plan({image, price}){
     return(
         <PlanContainer>
-            <img src={logo} alt=""/>
-            <p>R$ 39.90</p>
+            <svg src={image} alt=""/>
+            <p>R${price}</p>
         </PlanContainer>
     )
 }

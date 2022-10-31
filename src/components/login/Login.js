@@ -6,7 +6,7 @@ import logo from "../../assets/img/driven-plus.png"
 import FormStyle from "../../assets/styles/FormStyle"
 import LoginContainer from "../../assets/styles/LoginContainer"
 
-export default function Login() {
+export default function Login({setToken}) {
     const [loginInfo, setLoginInfo] = useState({ email: "", password: "" })
     const navigate = useNavigate();
     
@@ -26,8 +26,12 @@ export default function Login() {
         
         axios.post(URL, log).then((ans) => {
             alert("Login realizado com sucesso!");
-            console.log(ans.data)
-            navigate("/");
+            setToken(ans.data.token)
+            if(!ans.data.membership){
+                navigate("/subscriptions")
+            }else{
+                navigate("/home");
+            }
         }).catch((err) => {
                 alert(err.response.data.message); 
         })
