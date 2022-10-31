@@ -3,11 +3,14 @@ import logo from "../../assets/img/plano-logo.png"
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import retornar from "../../assets/img/retornar.png"
+import lista from "../../assets/img/lista.png"
+import dinheiro from "../../assets/img/dinheiro.png"
 
 export default function SubscriptionForm({token}){
     const { idSubscription } = useParams();
-
+    const [confirmSub, setConfirmSub] = useState(true)
     const [planData, setPlanData] = useState([]);
     const [paymentData, setPaymentData] = useState({
         cardName: "",
@@ -36,25 +39,29 @@ export default function SubscriptionForm({token}){
     function signPlan(){
         
     }
-    if(planData === []){
+    if(planData.length === 0){
         return <>
             Carregando
         </>
     }
 
     console.log("Dados", planData);
-   return(<>
-        <p> retornar </p>
+   return(<SubscriptionLayout>
+        <Link to="/plans">
+            <img src={retornar} alt=""/>
+        </Link>
         <LogoStyle>
-            <img src={logo} alt=""/>
+            <img src={planData.image} alt=""/>
             <p>{planData.name}</p>
         </LogoStyle>
         <PlanInfo>
             <div>
+                <img src={lista} alt=""/>
                 <p>Benefícios:</p>
             </div>
-                {planData.perks.map((perk)=> <p key={perk.id}>{perk.title}</p>)}
+                {planData.perks.map((perk,i)=> <p key={perk.id}>{i+1}. {perk.title}</p>)}
             <div>
+                <img src={dinheiro} alt=""/>
                 <p>Preço:</p>
             </div>
                 <p>R$ {planData.price} cobrados mensalmente</p>
@@ -73,6 +80,7 @@ export default function SubscriptionForm({token}){
                 type="text"
                 value={paymentData.cardNumber}
                 placeholder="Dígitos do cartão"
+                pattern="\d{16}"
                 onChange={formHandler}
                 required/>
              <div>
@@ -81,6 +89,7 @@ export default function SubscriptionForm({token}){
                     type="text"
                     value={paymentData.cvv}
                     placeholder="Código de segurança"
+                    pattern="\d{3}"
                     onChange={formHandler}
                     required/>
                 <input 
@@ -88,14 +97,21 @@ export default function SubscriptionForm({token}){
                     type="text"
                     value={paymentData.expiration}
                     placeholder="Validade"
+                    pattern="^(0[1-9]|1[0-2])\/?([0-9]{2})$"
                     onChange={formHandler}
                     required/>
              </div>
             <button type='submit'>ASSINAR</button>
         </FormStyle>
-    </>)
+    </SubscriptionLayout>)
 }
-
+const SubscriptionLayout = styled.div`
+    a{
+        img{
+            margin: 25px 0 0 22px;
+        }
+    }
+`
 const LogoStyle = styled.div`
     display: flex;
     flex-direction: column;
@@ -119,5 +135,6 @@ const PlanInfo = styled.div`
     div{
         display: flex;
         flex-direction: row;
+        margin: 5px 0;
     }
 `

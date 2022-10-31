@@ -3,13 +3,12 @@ import styled from "styled-components"
 export default function Plan({image, price}){
     return(
         <PlanContainer>
-            <svg xmlns={image} viewBox="0 0 24 24" stroke="currentColor">
-            </svg>
+            <img src={image} alt="" />
+
             <p>R${price}</p>
         </PlanContainer>
     )
 }
-
 
 const PlanContainer = styled.div`
     width: 290px;

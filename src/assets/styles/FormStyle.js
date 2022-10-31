@@ -3,24 +3,18 @@ import styled from "styled-components";
 const FormStyle = styled.form`
 display: flex;
 flex-direction: column;
-
 justify-content: center;
 align-items: center;
-
-
 input, button{
     width: 299px;
     height: 52px;
     border-radius: 8px;
     border: none;
     margin: 8px auto;
-
 }
-
 input{
-    padding-left: 10px;
+    padding-left: 5px;
 }
-
 button{
     color: #fff;
     font-weight: 700;
@@ -32,8 +26,10 @@ button{
     }
 }
 div{
-    width: 100%
+    width: 100%;
     display:flex;
+    flex-flow: row wrap;
+    justify-content: center;
     flex-wrap: wrap;
     input{
         width: 140px;
